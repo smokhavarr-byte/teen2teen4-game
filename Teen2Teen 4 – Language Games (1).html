@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teen2Teen 4 – Language Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mut:#667085;--pri:#6c3fc5;--ok:#1f9d55;--bad:#d64545;--line:#dfe3ee;--chip:#ece8fa;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141c;--card:#1c2030;--ink:#eef0f7;--mut:#9aa3b8;--pri:#a68bff;--ok:#43c47c;--bad:#ff7b7b;--line:#2d3350;--chip:#2a2548;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12141c;--card:#1c2030;--ink:#eef0f7;--mut:#9aa3b8;--pri:#a68bff;--ok:#43c47c;--bad:#ff7b7b;--line:#2d3350;--chip:#2a2548;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:680px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px;color:var(--pri)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 12px}
+.fa{direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip,.tab{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px}
+.chip.on,.tab.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px}
+.flash{min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:26px;font-weight:700;cursor:pointer}
+.flash small{font-size:13px;color:var(--mut);font-weight:400;margin-top:8px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card)}
+.opt.fa{text-align:right}
+.opt.ok,.m.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.opt.no,.m.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--card))}
+.btn{background:var(--pri);color:#fff;border:0;border-radius:12px;padding:10px 18px;margin:4px 6px 0 0}
+.btn.alt{background:var(--chip);color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m{padding:12px 8px;border-radius:12px;border:1px solid var(--line);background:var(--card);text-align:center;min-height:52px}
+.m.sel{border-color:var(--pri);box-shadow:0 0 0 2px var(--pri)}
+.m.done{opacity:.35;pointer-events:none}
+.bar{display:flex;justify-content:space-between;color:var(--mut);font-size:14px}
+.big{font-size:34px;font-weight:700;text-align:center;color:var(--pri)}
+body{background:radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--pri) 18%,transparent),transparent 45%),radial-gradient(circle at 100% 25%,color-mix(in srgb,#ffb703 20%,transparent),transparent 40%),var(--bg)}
+.hero{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#6c3fc5,#ff6fb5);color:#fff;border-radius:20px;padding:14px 16px;margin-bottom:12px;box-shadow:0 6px 18px rgba(108,63,197,.3)}
+.hero h1{color:#fff;font-size:21px}.hero .sub{color:#ffffffd0;margin:0}
+.mas{font-size:48px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-6deg)}}
+.em{font-size:68px;line-height:1.1;animation:pop .35s}.em2{font-size:22px;margin-inline-end:4px}
+@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:none;opacity:1}}
+.card{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.flash{background:linear-gradient(160deg,var(--card),var(--chip))}
+.tab{font-weight:700}.chip.on,.tab.on{box-shadow:0 3px 10px rgba(108,63,197,.4);transform:translateY(-1px)}
+.btn{box-shadow:0 3px 0 rgba(0,0,0,.22)}.btn:active{transform:translateY(2px);box-shadow:none}
+.opt:hover,.m:hover{border-color:var(--pri)}.opt.ok,.m.ok{animation:pop .3s}.opt.no,.m.no{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.in{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.cf{position:fixed;top:-30px;font-size:24px;pointer-events:none;animation:fall 1.8s linear forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.3}}
+</style></head>
+<body><main>
+<div class="hero"><span class="mas">🦉</span><div><h1>Teen2Teen 4 – Language Games</h1>
+<p class="sub">Units 8–12 · <span class="fa">بازی‌های یادگیری لغت و گرامر</span></p>
+</div></div><div class="row" id="who"></div><div class="row" id="units"></div>
+<div class="row" id="modes"></div>
+<div id="app"></div>
+</main>
+<script>
+const P=s=>s.trim().split("\n").map(x=>x.split("|"));
+const U={
+8:{t:"Unit 8 · Environment",v:P(`recycle|بازیافت کردن
+waste|هدر دادن
+environment|محیط زیست
+garbage|زباله
+litter|زباله‌ی ریخته در محیط
+reuse|دوباره استفاده کردن
+compost bin|سطل کمپوست
+landfill|محل دفن زباله
+pollute|آلوده کردن
+harmful|مضر
+reduce|کاهش دادن
+electricity|برق
+drought|خشکسالی
+cut down|قطع کردن (درخت)
+aluminum|آلومینیوم
+leftover|باقی‌مانده، ته‌مانده
+recyclable|قابل بازیافت
+air pollution|آلودگی هوا
+remind|یادآوری کردن
+expected behavior|رفتار مورد انتظار`),
+g:[["You ___ turn off the lights when you leave.","are supposed to","is supposed to","supposed to"],["We ___ meet after school. I’m not sure yet.","might","might to","are might"],["They ___ throw litter on the ground. It’s not allowed.","aren’t supposed to","isn’t supposed to","don’t supposed to"],["It ___ rain tomorrow, so take an umbrella.","might","is might","might to"]]},
+9:{t:"Unit 9 · Personal care & ads",v:P(`soap|صابون
+deodorant|دئودورانت
+shampoo|شامپو
+toothpaste|خمیردندان
+sunscreen|کرم ضدآفتاب
+body lotion|لوسیون بدن
+shaving cream|کرم اصلاح
+face wash|شوینده‌ی صورت
+hair gel|ژل مو
+hair spray|اسپری مو
+makeup|آرایش
+nail polish|لاک ناخن
+claim|ادعا
+gullible|زودباور
+skeptical|شکاک، بدبین
+guaranteed|تضمین‌شده
+advertiser|تبلیغ‌کننده
+pop-up ad|تبلیغ پاپ‌آپ
+ridiculous|مضحک، پوچ
+a waste of money|هدر دادن پول`),
+g:[["This hair gel is great, ___?","isn’t it","is it","doesn’t it"],["You don’t believe that, ___?","do you","don’t you","are you"],["She bought the makeup, ___?","didn’t she","did she","wasn’t she"],["I’m late, ___?","aren’t I","am I not","amn’t I"]]},
+10:{t:"Unit 10 · Bullying",v:P(`gossip about someone|پشت سر کسی حرف زدن
+tell a lie about someone|درباره‌ی کسی دروغ گفتن
+ignore someone|کسی را نادیده گرفتن
+tease someone|کسی را اذیت کردن، دست انداختن
+play a joke on someone|سر کسی شوخی درآوردن
+threaten someone|کسی را تهدید کردن
+bully|قلدر؛ قلدری کردن
+cyberbullying|قلدری اینترنتی
+victim|قربانی
+anonymously|به‌صورت ناشناس
+embarrassing|شرم‌آور
+personal information|اطلاعات شخصی
+block|مسدود کردن
+effective|مؤثر
+hurtful|آزاردهنده
+grateful|سپاسگزار
+speak up|جرئت کردن و حرف زدن
+fault|تقصیر
+refreshments|پذیرایی، نوشیدنی و تنقلات
+make a difference|تفاوت ایجاد کردن`),
+g:[["I didn’t see ___ in the hall.","anyone","no one","someone"],["___ told the teacher a lie.","Someone","Anyone","Anything"],["There’s ___ in my locker. It’s empty.","nothing","anything","something"],["Did ___ talk to the new girl?","anyone","no one","nothing"]]},
+11:{t:"Unit 11 · Crime",v:P(`steal|دزدیدن
+shoplift|از مغازه دزدی کردن
+pickpocket|جیب‌بری کردن
+snatch|قاپیدن
+break into|به زور وارد شدن (برای دزدی)
+rob|دزدی مسلحانه کردن
+vandalize|خرابکاری کردن
+cheat|کلاه برداشتن، فریب دادن
+burglar|سارق، دزد
+burglary|سرقت از خانه یا مغازه
+crime|جرم
+valuables|اشیای قیمتی
+personal space|حریم شخصی
+be aware of|آگاه بودن از
+in public|در ملأ عام
+purse|کیف دستی زنانه
+necklace|گردنبند
+ATM|خودپرداز
+souvenir|سوغاتی
+nearby|نزدیک، آن اطراف`),
+g:[["Someone stole the laptop ___ was on my desk.","that","who","he"],["Where’s the boy ___ shoplifted those sweaters?","who","he","what"],["I know the girl ___ saw the burglar.","who","what","it"],["They found the camera ___ the burglar stole.","that","who","it"]]},
+12:{t:"Unit 12 · Holidays",v:P(`give a gift|هدیه دادن
+send a card|کارت فرستادن
+wear a costume|لباس نمایشی پوشیدن
+watch a parade|رژه تماشا کردن
+watch fireworks|آتش‌بازی تماشا کردن
+remember the dead|یاد درگذشتگان را گرامی داشتن
+take the day off|یک روز مرخصی گرفتن
+wish each other a happy holiday|تعطیلات را به هم تبریک گفتن
+put up decorations|تزئینات نصب کردن
+festival|جشنواره
+tradition|سنت
+good luck|خوش‌شانسی
+bad luck|بدشانسی
+dumplings|دامپلینگ (کلوچه‌ی خمیری)
+red envelope|پاکت قرمز (عیدی)
+cemetery|گورستان
+greet|سلام و احوال‌پرسی کردن
+calendar|تقویم
+prepare|آماده کردن
+celebrate|جشن گرفتن`),
+g:[["Rio is the city ___ many people go to see the Carnaval parade.","where","when","who"],["July 1st is the day ___ Canadians celebrate their country’s birthday.","when","where","who"],["They gave ___ gifts.","each other","themselves","each others"],["I went to the parade by ___.","myself","me","itself"],["Some people hurt ___ when they set off fireworks.","themselves","each other","theirselves"]]}
+};
+const E=Object.fromEntries(`recycle|♻️
+waste|🚰
+environment|🌍
+garbage|🗑️
+litter|🚮
+reuse|🔄
+compost bin|🍂
+landfill|⛰️
+pollute|🏭
+harmful|☠️
+reduce|📉
+electricity|💡
+drought|🏜️
+cut down|🪓
+aluminum|🥫
+leftover|🍝
+recyclable|🧃
+air pollution|🌫️
+remind|⏰
+expected behavior|✅
+soap|🧼
+deodorant|🧴
+shampoo|🚿
+toothpaste|🪥
+sunscreen|🌞
+body lotion|🤲
+shaving cream|🪒
+face wash|🫧
+hair gel|💇
+hair spray|💨
+makeup|💄
+nail polish|💅
+claim|📢
+gullible|🐑
+skeptical|🤨
+guaranteed|🏅
+advertiser|📺
+pop-up ad|🪟
+ridiculous|🤪
+a waste of money|💸
+gossip about someone|🗣️
+tell a lie about someone|🤥
+ignore someone|🙈
+tease someone|😜
+play a joke on someone|🤡
+threaten someone|😠
+bully|👊
+cyberbullying|📱
+victim|😢
+anonymously|🕵️
+embarrassing|😳
+personal information|🪪
+block|🚫
+effective|💪
+hurtful|💔
+grateful|🙏
+speak up|📣
+fault|👉
+refreshments|🥤
+make a difference|✨
+steal|🦹
+shoplift|🛍️
+pickpocket|🤏
+snatch|👜
+break into|🔓
+rob|💰
+vandalize|🖌️
+cheat|🃏
+burglar|🥷
+burglary|🏚️
+crime|🚔
+valuables|💎
+personal space|↔️
+be aware of|👀
+in public|👥
+purse|👛
+necklace|📿
+ATM|🏧
+souvenir|🎁
+nearby|📍
+give a gift|🎁
+send a card|💌
+wear a costume|🎭
+watch a parade|🎺
+watch fireworks|🎆
+remember the dead|🕯️
+take the day off|🏖️
+wish each other a happy holiday|🎉
+put up decorations|🎄
+festival|🏮
+tradition|🏺
+good luck|🍀
+bad luck|🖤
+dumplings|🥟
+red envelope|🧧
+cemetery|🪦
+greet|👋
+calendar|📅
+prepare|🍳
+celebrate|🥳`.split("\n").map(x=>x.split("|")));
+const ST={
+8:{t:"Sara and the Water",sc:[["🪥🚿👧","Sara is brushing her teeth. The water is running."],["👨💧","Dad says, “You’re supposed to turn off the water.”"],["🚰✋","Sara turns off the water. “Oops, I forgot!”"],["♻️🥫","Then she puts the soda can in the recycling bin. “Small actions can help the planet!”"],["🏫🧒","At school, Sara tells her friends about the water. “We’re supposed to save it!”"],["🏞️🧒🧒","On Saturday, they go to the park. Some kids might leave litter on the grass."],["🚮🧤","Sara and her friends pick up the litter. They put it in the garbage can."],["🌳😊","The park looks clean and beautiful. “A small action can make a big difference,” says Sara."]],q:[["What was Sara doing?","Brushing her teeth","Eating lunch","Watering flowers"],["What did she put in the recycling bin?","A soda can","A banana peel","A book"],["Where do Sara and her friends go on Saturday?","To the park","To the beach","To the mall"],["What do they do with the litter?","They put it in the garbage can","They leave it on the grass","They throw it in the lake"]]},
+9:{t:"The Magic Hair Gel",sc:[["🛍️💇","Mia sees an ad for a magic hair gel. It says, “Long hair in one week!”"],["🤨👦","Her brother Sam says, “You don’t believe that, do you?”"],["🧴💸","Mia thinks about it. “It’s too good to be true, isn’t it?”"],["✅💡","She decides not to buy it. Now she is skeptical about ads."],["🏪🧴","At the store, Mia sees a real hair gel. It costs only five dollars."],["💬🧑‍💼","The seller says, “This gel is good, but it can’t make your hair grow.”"],["📱🔍","Mia reads about the gel online. Many people say it is just a normal gel."],["😄🌟","Mia buys the normal hair gel. “I think carefully before I spend my money,” she says."]],q:[["What did the ad promise?","Long hair in one week","Clean teeth","New shoes"],["What does Mia decide?","Not to buy it","To buy it","To ask Sam for money"],["How much is the real hair gel?","Five dollars","Fifty dollars","One dollar"],["What does the seller say?","The gel can’t make hair grow","The gel is magic","The gel is free"]]},
+10:{t:"Speak Up",sc:[["🏫👧","At school, some kids are teasing a new girl named Julia."],["😢👦","Ben sees it, but he doesn’t say anything. He feels awful."],["🗣️🧑‍🏫","Later, he tells a teacher. It’s not too late to speak up."],["🤝😊","The kids stop. Julia says, “Thank you!”"],["🍎🧒","The next day, Ben sits with Julia at lunch."],["⚽🎉","They play soccer with other friends after school."],["📱⚠️","Then Julia sees a mean message about her online. She feels sad."],["🧑‍🏫👍","Ben says, “Don’t deal with it alone. Let’s tell an adult.” Julia feels better."]],q:[["How does Ben feel?","Awful","Happy","Hungry"],["Who does Ben tell?","A teacher","His dog","The bully"],["Where does Ben sit the next day?","With Julia","Alone","With the teacher"],["What does Ben say about the mean message?","Tell an adult","Ignore your friends","Write a mean message back"]]},
+11:{t:"The Lost Phone",sc:[["📱😱","Leo shouts, “Someone stole my phone!”"],["🤔👧","His friend asks, “Are you sure?” Leo says, “Positive!”"],["🎒🔍","“Wait a minute,” says his friend. Leo looks in his backpack."],["📱😄","The phone is there! Nobody stole it."],["🏫👛","At school, another student finds a wallet near the lockers."],["🔍👀","The student looks around. No one is nearby."],["🏢🗣️","He takes the wallet to the main office. “Someone lost this,” he says."],["😊👧","A girl comes to the office. “That’s the wallet that I lost!” she says."]],q:[["Where was the phone?","In his backpack","In his locker","At home"],["Did someone steal the phone?","No, nobody did","Yes, a burglar did","Yes, his friend did"],["Where does the student take the wallet?","To the main office","To the cafeteria","Home"],["Who comes to the office?","A girl who lost it","A burglar","The teacher"]]},
+12:{t:"The Spring Festival",sc:[["🏮🏠","It’s the Spring Festival in China. Families clean their homes."],["🧧🧒","Grandma gives the children red envelopes."],["🥟👨‍👩‍👧","Everyone makes dumplings together."],["🐉🎆","At night, dragon dancers dance and people watch fireworks."],["🧳🚆","Many people travel home for the festival. It’s the biggest trip in the world."],["🚫🏺","People are careful not to break anything. It might bring bad luck."],["🥁🌃","The drums are loud, and it’s hard to sleep!"],["🎊👋","In the morning, everyone says, “Happy New Year!” to each other."]],q:[["What do the children get from Grandma?","Red envelopes","Toys","Dumplings"],["What do people watch at night?","Fireworks","A movie","A soccer game"],["Why do people travel home?","To see their families","To go to school","To buy a car"],["What might bring bad luck?","Breaking something","Wearing red","Eating dumplings"]]}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const CLASS={};
+let BD={},ME="";
+try{BD=JSON.parse(localStorage.getItem("t2t_board")||"{}");ME=localStorage.getItem("t2t_me")||""}catch(e){}
+const save=()=>{try{localStorage.setItem("t2t_board",JSON.stringify(BD));localStorage.setItem("t2t_me",ME)}catch(e){}};
+function addPts(n){if(!ME)return;const b=BD[ME]||(BD[ME]={pts:0,ok:0});b.pts+=n;b.ok++;save();who()}
+function who(){const w=document.querySelector("#who");if(!w)return;w.innerHTML=ME?`<span class="chip on">👤 ${esc(ME)} · ⭐ ${(BD[ME]||{pts:0}).pts}</span><button class="chip" data-a="sw">Change player</button>`:`<input id="nm" class="in" placeholder="Your name · اسم تو" maxlength="16" style="flex:1;min-width:150px"><button class="btn" data-a="nm">Start ▶</button>`}
+let RUN=0;
+const LT={
+8:{t:"Planning a Clean-Up Day",sp:["Tom","Ana"],l:[[0,"Hi, Ana! Are you coming to the clean-up day on Saturday?"],[1,"Of course! What are we supposed to do?"],[0,"We’re supposed to meet at the park at nine o’clock."],[1,"Do we need to bring anything?"],[0,"Yes. We might need gloves and garbage bags."],[1,"I have gloves. I can bring some extra ones for our friends."],[0,"Great idea! Also, bring a bottle of water. Don’t buy a new plastic bottle."],[1,"Good point. We should reuse bottles, not waste them."],[0,"After we pick up the litter, we’re going to recycle the cans and bottles."],[1,"That’s a lot of work, but it will make the park beautiful."],[0,"Exactly! A small action can make a big difference."]],q:[["When is the clean-up day?","Saturday","Sunday","Friday"],["Where do they meet?","At the park","At school","At the library"],["What might they need?","Gloves and garbage bags","Cameras and phones","Paint and brushes"],["What should they reuse?","Bottles","Paper","Phones"],["What will they do with the cans and bottles?","Recycle them","Throw them in the lake","Sell them"]]},
+9:{t:"At the Pharmacy",sp:["Lily","Sam"],l:[[0,"Sam, look at this ad! It says this face wash clears all pimples in one night."],[1,"In one night? You don’t believe that, do you?"],[0,"Well, the girl in the ad has perfect skin, doesn’t she?"],[1,"Yes, but ads use makeup and special lights."],[0,"Hmm. That’s true. The price is thirty dollars, isn’t it?"],[1,"Yes, it’s expensive. Let’s check the other brands."],[0,"Here’s a simple face wash. It costs only six dollars."],[1,"And it’s good for sensitive skin. Look at the label."],[0,"You’re right. Reading the label is smarter than believing the ad."],[1,"Exactly. Think before you buy!"]],q:[["What does the ad say?","It clears pimples in one night","It makes hair grow","It cures a cold"],["How much is the face wash in the ad?","Thirty dollars","Six dollars","Sixty dollars"],["What do ads use, according to Sam?","Makeup and special lights","Only natural light","No makeup"],["How much is the simple face wash?","Six dollars","Thirty dollars","It is free"],["What is smarter than believing the ad?","Reading the label","Buying two","Asking a friend"]]},
+10:{t:"What Should We Do?",sp:["Nora","Max"],l:[[0,"Max, something is wrong. Did you see Kim at lunch?"],[1,"Yes. She sat alone. No one talked to her."],[0,"I heard some kids are gossiping about her online."],[1,"That’s terrible! Is it true?"],[0,"No. Someone told lies about her on a social site."],[1,"We shouldn’t ignore this. It’s not nice, and it’s not right."],[0,"I agree. What should we do?"],[1,"First, let’s sit with her tomorrow. Then let’s tell a teacher."],[0,"Good idea. And we can tell her not to deal with it alone."],[1,"Right. Small actions can make a big difference."]],q:[["Where did Kim sit at lunch?","Alone","With Max","With Nora"],["What are some kids doing online?","Gossiping about her","Playing games","Sending gifts"],["What did someone tell?","Lies about her","Jokes about school","Stories about cats"],["What will they do first?","Sit with her","Block her","Call the police"],["Who will they tell?","A teacher","The bully","A stranger"]]},
+11:{t:"Report to the Police",sp:["Officer","Dan"],l:[[0,"Good morning. How can I help you?"],[1,"Someone broke into my house last night."],[0,"Was anyone at home?"],[1,"No, we were out. My neighbor saw the man who did it."],[0,"What did he look like?"],[1,"He was tall, and he wore a black jacket. He ran away with a bag."],[0,"What did he take?"],[1,"He took a laptop that was on my desk, and some jewelry."],[0,"Did you see anything else?"],[1,"My neighbor says the car that he drove was blue."],[0,"Thank you. We’ll check the cameras on your street."]],q:[["What happened at Dan’s house?","Someone broke in","A fire started","A pipe broke"],["Who saw the man?","The neighbor","Dan","The officer"],["What did the man wear?","A black jacket","A red hat","A blue coat"],["What did he take?","A laptop and jewelry","A TV and a bike","Money and a camera"],["What color was the car?","Blue","Black","Red"]]},
+12:{t:"National Day Plans",sp:["Zoe","Kai"],l:[[0,"What’s your family doing for National Day, Kai?"],[1,"We’re going to my grandparents’ house. That’s the place where we always celebrate."],[0,"Sounds fun! How do you usually celebrate?"],[1,"We watch the parade in the morning, and we wear red and white."],[0,"Do you give each other gifts?"],[1,"Yes! We give each other small gifts, and Grandma makes dumplings."],[0,"Delicious! Do you watch fireworks at night?"],[1,"Of course. It’s the time when the whole city looks beautiful."],[0,"I’m taking the day off to visit my cousins."],[1,"Great! Happy National Day, Zoe!"]],q:[["Where is Kai’s family going?","To his grandparents’ house","To the beach","To a hotel"],["What do they do in the morning?","Watch a parade","Go to school","Clean the house"],["What colors do they wear?","Red and white","Blue and green","Black and yellow"],["What does Grandma make?","Dumplings","Pizza","Soup"],["What is Zoe doing?","Taking the day off to visit cousins","Going to school","Working late"]]}};
+const UE={8:"🌍",9:"🧴",10:"🛡️",11:"🚨",12:"🎉"};
+for(const k in U)U[k].v.forEach(p=>p[2]=E[p[0]]||UE[k]);
+function boom(n){addPts(10);const c=["🎉","⭐","✨","🎈","💜"];for(let i=0;i<n;i++){const s=document.createElement("span");s.className="cf";s.textContent=c[i%5];s.style.left=Math.random()*95+"%";s.style.animationDelay=Math.random()*.4+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),2500)}}
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5);
+const MODES=[["listen","Listening","شنیداری"],["long","Long listening","شنیدن طولانی"],["flash","Flashcards","فلش‌کارت"],["match","Match","وصل کردن"],["quiz","Quiz","آزمون"],["gram","Grammar","گرامر"]];
+MODES.push(["board","Leaderboard","رتبه‌بندی"]);
+let unit="all",mode="flash",S={};
+const words=()=>unit=="all"?Object.values(U).flatMap(u=>u.v):U[unit].v;
+const gram=()=>unit=="all"?Object.values(U).flatMap(u=>u.g):U[unit].g;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";speechSynthesis.speak(u)}catch(e){}}
+function head(){who();
+ $("#units").innerHTML=[["all","All units"],...Object.keys(U).map(k=>[k,"Unit "+k])].map(([k,l])=>`<button class="chip ${unit==k?"on":""}" data-a="u" data-k="${k}">${l}</button>`).join("");
+ $("#modes").innerHTML=MODES.map(([k,e,f])=>`<button class="tab ${mode==k?"on":""}" data-a="md" data-k="${k}">${e} · <span class="fa">${f}</span></button>`).join("")}
+function start(){RUN++;try{speechSynthesis.cancel()}catch(e){}
+ const w=words();S={};
+ if(mode=="flash"){S.d=sh(w);S.i=0;S.f=false}
+ if(mode=="match"){S.score=0;round()}
+ if(mode=="quiz"){S.q=sh(w).slice(0,10).map(p=>({p,fw:Math.random()<.5,o:sh([p,...sh(w.filter(x=>x!==p)).slice(0,3)])}));S.i=0;S.s=0;S.a=null}
+ if(mode=="long"){const ks=Object.keys(LT);S.k=unit=="all"?ks[Math.floor(Math.random()*ks.length)]:unit;S.li=-1;S.show=false;S.qi=-1;S.s=0;S.a=null;S.slow=false}
+ if(mode=="listen"){const ks=Object.keys(ST);S.k=unit=="all"?ks[Math.floor(Math.random()*ks.length)]:unit;S.i=0;S.show=false;S.qi=-1;S.s=0;S.a=null}
+ if(mode=="gram"){S.q=sh(gram());S.i=0;S.s=0;S.a=null;S.o=sh(S.q[0].slice(1))}
+ head();draw()}
+function round(){S.r=sh(words()).slice(0,6);S.en=sh([0,1,2,3,4,5]);S.fa=sh([0,1,2,3,4,5]);S.done=[];S.sel=null;S.bad=null}
+function playAll(){try{speechSynthesis.cancel();const sc=ST[S.k].sc;let i=0;const go=()=>{if(i>=sc.length||mode!="listen"||S.qi>=0)return;S.i=i;draw();const u=new SpeechSynthesisUtterance(sc[i][1]);u.lang="en-US";u.rate=.9;u.onend=()=>{i++;setTimeout(go,500)};speechSynthesis.speak(u)};go()}catch(e){}}
+function drawB(A){const M={};for(const n in CLASS)M[n]={pts:CLASS[n]};for(const n in BD)M[n]={pts:Math.max((M[n]||{}).pts||0,BD[n].pts)};const r=Object.entries(M).sort((a,b)=>b[1].pts-a[1].pts),m=["🥇","🥈","🥉"],top=Math.max(1,r.length?r[0][1].pts:1);
+ A.innerHTML=`<div class="card"><h2 style="margin:0 0 8px">🏆 Leaderboard</h2>${r.length?r.map(([n,b],i)=>`<div style="margin:10px 0"><div class="bar" style="color:var(--ink);font-size:16px"><span>${m[i]||(i+1)+"."} ${esc(n)}${n==ME?" (you)":""}</span><b>${b.pts} pts</b></div><div style="height:8px;border-radius:8px;background:var(--chip)"><div style="height:8px;border-radius:8px;width:${Math.max(4,b.pts/top*100)}%;background:var(--pri)"></div></div></div>`).join(""):`<p style="color:var(--mut)">No scores yet. Enter your name and play! <span class="fa">اسمت را بنویس و بازی کن</span></p>`}<p style="color:var(--mut);font-size:13px;margin-bottom:0">10 points for every correct answer. Your points are saved on this device; the teacher adds everyone’s results to the class ranking.</p></div>
+ <div class="card"><b>Add a result</b> <span class="fa" style="color:var(--mut);font-size:13px">برای ثبت نتیجه‌ی دستگاه دیگر</span><div class="row"><input id="an" class="in" placeholder="Name" maxlength="16" style="flex:1;min-width:110px"><input id="ap" class="in" type="number" min="0" placeholder="Points" style="width:100px"><button class="btn" data-a="ad">Add</button></div></div>
+ <div class="row"><button class="btn alt" data-a="cp">📋 Copy my result</button><button class="btn alt" data-a="cb">📋 Copy board</button><button class="btn alt" data-a="rs">${S.rst?"Tap again to erase all":"Reset board"}</button></div>`}
+function playG(){try{speechSynthesis.cancel();const L=LT[S.k].l,id=++RUN;let i=0;const go=()=>{if(RUN!=id||mode!="long"||S.qi>=0)return;if(i>=L.length){S.li=-1;draw();return}S.li=i;draw();const u=new SpeechSynthesisUtterance(L[i][1]);u.lang="en-US";u.rate=S.slow?.7:.95;u.pitch=L[i][0]?.8:1.25;u.onend=()=>{i++;setTimeout(go,400)};speechSynthesis.speak(u)};go()}catch(e){}}
+function drawG(A){const s=LT[S.k];
+ if(S.qi>=0){
+  if(S.qi>=s.q.length){A.innerHTML=`<div class="card"><p class="big">${"⭐".repeat(S.s+1)}<br>${S.s} / ${s.q.length}</p><button class="btn" data-a="re">New conversation</button><button class="btn alt" data-a="gr">Listen again</button></div>`;return}
+  const q=s.q[S.qi];
+  A.innerHTML=`<div class="bar"><span>Question ${S.qi+1} / ${s.q.length}</span><span>Score: ${S.s}</span></div><div class="card"><div class="em">❓</div><p style="font-size:20px;font-weight:700">${q[0]}</p>${S.o.map((x,k)=>`<button class="opt ${S.a!=null&&x===q[1]?"ok":""} ${S.a==k&&x!==q[1]?"no":""}" data-a="g2" data-k="${k}">${x}</button>`).join("")}${S.a!=null?`<button class="btn" data-a="g3">Next →</button>`:""}</div>`;return}
+ A.innerHTML=`<div class="bar"><span>${s.t}</span><span></span></div>
+ <div class="card"><div class="em" style="font-size:54px;text-align:center">🎧</div><p style="text-align:center;color:var(--mut)">Listen to the conversation between ${s.sp[0]} and ${s.sp[1]}.<br><span class="fa">به مکالمه گوش کن</span></p>${S.show?s.l.map((x,i)=>`<p style="margin:6px 0;${S.li==i?"font-weight:700;color:var(--pri)":""}"><b>${s.sp[x[0]]}:</b> ${x[1]}</p>`).join(""):`<p style="text-align:center">${S.li>=0?"Line "+(S.li+1)+" / "+s.l.length:""}</p>`}</div>
+ <div class="row"><button class="btn" data-a="gp">▶ Play</button><button class="btn alt" data-a="gs">${S.slow?"🐢 Slow":"🐇 Normal"}</button><button class="btn alt" data-a="gx">⏹ Stop</button><button class="btn" data-a="gq">Questions ➜</button></div>`}
+function drawL(A){const s=ST[S.k],n=s.sc.length;
+ if(S.qi>=0){
+  if(S.qi>=s.q.length){A.innerHTML=`<div class="card"><p class="big">${"⭐".repeat(S.s+1)}<br>${S.s} / ${s.q.length}</p><button class="btn" data-a="re">New story</button><button class="btn alt" data-a="lr">Listen again</button></div>`;return}
+  const q=s.q[S.qi];
+  A.innerHTML=`<div class="bar"><span>Question ${S.qi+1} / ${s.q.length}</span><span>Score: ${S.s}</span></div><div class="card"><div class="em">❓</div><p style="font-size:20px;font-weight:700">${q[0]}</p>${S.o.map((x,k)=>`<button class="opt ${S.a!=null&&x===q[1]?"ok":""} ${S.a==k&&x!==q[1]?"no":""}" data-a="la" data-k="${k}">${x}</button>`).join("")}${S.a!=null?`<button class="btn" data-a="ln">Next →</button>`:""}</div>`;return}
+ const c=s.sc[S.i];
+ A.innerHTML=`<div class="bar"><span>${s.t} · ${S.i+1} / ${n}</span><span></span></div>
+ <div class="card flash" style="cursor:default"><div class="em" style="font-size:84px">${c[0]}</div>${S.show?`<p style="font-size:19px;font-weight:700;margin:10px 0 0">${c[1]}</p>`:`<small>Listen carefully · <span class="fa">با دقت گوش کن</span></small>`}</div>
+ <div class="row"><button class="btn alt" data-a="lp">← Back</button><button class="btn" data-a="ls">🔊 Listen</button><button class="btn alt" data-a="lpa">▶ Play all</button><button class="btn" data-a="lnx">${S.i==n-1?"Questions ➜":"Next →"}</button></div>`}
+function draw(){
+ const A=$("#app");
+ if(mode=="board")return drawB(A);
+ if(mode=="long")return drawG(A);
+ if(mode=="listen")return drawL(A);
+ if(mode=="flash"){const p=S.d[S.i];
+  A.innerHTML=`<div class="bar"><span>${S.i+1} / ${S.d.length}</span><button class="chip" data-a="sp">🔊 Listen</button></div>
+  <div class="card flash" data-a="fl"><div class="em">${p[2]}</div>${S.f?`<span class="fa">${p[1]}</span>`:p[0]}<small>${S.f?"tap to see English":"tap to see Persian · برای دیدن معنی بزن"}</small></div>
+  <div class="row"><button class="btn alt" data-a="pv">← Back</button><button class="btn" data-a="nx">Next →</button><button class="btn alt" data-a="re">Shuffle</button></div>`}
+ if(mode=="match"){
+  const fin=S.done.length==6;
+  A.innerHTML=`<div class="bar"><span>Match each word with its meaning</span><span>Score: ${S.score}</span></div>
+  <div class="card"><div class="grid"><div>${S.en.map(i=>`<button class="m ${S.done.includes(i)?"done":""} ${S.sel&&S.sel.s=="en"&&S.sel.i==i?"sel":""} ${S.bad&&S.bad.some(b=>b.s=="en"&&b.i==i)?"no":""}" style="width:100%;margin-bottom:8px" data-a="m" data-s="en" data-i="${i}"><span class="em2">${S.r[i][2]}</span>${S.r[i][0]}</button>`).join("")}</div>
+  <div>${S.fa.map(i=>`<button class="m fa ${S.done.includes(i)?"done":""} ${S.sel&&S.sel.s=="fa"&&S.sel.i==i?"sel":""} ${S.bad&&S.bad.some(b=>b.s=="fa"&&b.i==i)?"no":""}" style="width:100%;margin-bottom:8px" data-a="m" data-s="fa" data-i="${i}">${S.r[i][1]}</button>`).join("")}</div></div>
+  ${fin?`<p class="big">🎉 Well done!</p><button class="btn" data-a="nr">New round</button>`:""}</div>`}
+ if(mode=="quiz"){
+  if(S.i>=S.q.length){A.innerHTML=`<div class="card"><p class="big">${"⭐".repeat(Math.ceil(S.s/2))||"💪"}<br>${S.s} / ${S.q.length}</p><p style="text-align:center">${S.s>=8?"Excellent! 🌟":S.s>=5?"Good job! Try again to improve.":"Keep practicing!"}</p><button class="btn" data-a="re">Play again</button></div>`;return}
+  const q=S.q[S.i],ci=q.fw?0:1,ai=q.fw?1:0;
+  A.innerHTML=`<div class="bar"><span>Question ${S.i+1} / ${S.q.length}</span><span>Score: ${S.s}</span></div>
+  <div class="card"><div class="em">${q.p[2]}</div><p class="${q.fw?"":"fa"}" style="font-size:22px;font-weight:700;margin-top:0">${q.fw?"What does “"+q.p[0]+"” mean?":q.p[1]}</p>
+  ${q.o.map((o,k)=>`<button class="opt ${q.fw?"fa":""} ${S.a!=null&&o===q.p?"ok":""} ${S.a==k&&o!==q.p?"no":""}" data-a="qa" data-k="${k}">${o[ai]}</button>`).join("")}
+  ${S.a!=null?`<button class="btn" data-a="qn">Next →</button>`:""}</div>`}
+ if(mode=="gram"){
+  if(S.i>=S.q.length){A.innerHTML=`<div class="card"><p class="big">${S.s} / ${S.q.length}</p><button class="btn" data-a="re">Play again</button></div>`;return}
+  const q=S.q[S.i];
+  A.innerHTML=`<div class="bar"><span>Choose the correct word(s)</span><span>Score: ${S.s}</span></div>
+  <div class="card"><p style="font-size:20px;font-weight:700;margin-top:0">${q[0].replace("___","<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>")}</p>
+  ${S.o.map((o,k)=>`<button class="opt ${S.a!=null&&o===q[1]?"ok":""} ${S.a==k&&o!==q[1]?"no":""}" data-a="ga" data-k="${k}">${o}</button>`).join("")}
+  ${S.a!=null?`<p style="color:var(--mut)">${q[0].replace("___","<b>"+q[1]+"</b>")}</p><button class="btn" data-a="gn">Next →</button>`:""}</div>`}
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-a]");if(!t)return;const a=t.dataset.a;
+ if(a=="u"){unit=t.dataset.k;return start()}
+ if(a=="md"){mode=t.dataset.k;return start()}
+ if(a=="re")return start();
+ if(a=="fl"){S.f=!S.f;draw()}
+ if(a=="nx"){S.i=(S.i+1)%S.d.length;S.f=false;draw()}
+ if(a=="pv"){S.i=(S.i-1+S.d.length)%S.d.length;S.f=false;draw()}
+ if(a=="sp")speak(S.d[S.i][0]);
+ if(a=="nr"){round();draw()}
+ if(a=="m"){const c={s:t.dataset.s,i:+t.dataset.i};
+  if(!S.sel||S.sel.s==c.s){S.sel=c;S.bad=null}
+  else if(S.sel.i==c.i){S.done.push(c.i);S.score++;S.sel=null;S.bad=null;speak(S.r[c.i][0]);boom(8)}
+  else{S.bad=[S.sel,c];S.sel=null;draw();setTimeout(()=>{S.bad=null;draw()},600);return}
+  draw()}
+ if(a=="qa"&&S.a==null){const k=+t.dataset.k;S.a=k;if(S.q[S.i].o[k]===S.q[S.i].p){S.s++;boom(14)}draw()}
+ if(a=="qn"){S.i++;S.a=null;draw()}
+ if(a=="ga"&&S.a==null){const k=+t.dataset.k;S.a=k;if(S.o[k]===S.q[S.i][1]){S.s++;boom(14)}draw()}
+ if(a=="gn"){S.i++;S.a=null;if(S.i<S.q.length)S.o=sh(S.q[S.i].slice(1));draw()}
+ if(a=="lt"){S.show=!S.show;draw()}
+ if(a=="ls")speak(ST[S.k].sc[S.i][1]);
+ if(a=="lp"&&S.i>0){S.i--;draw()}
+ if(a=="lpa")playAll();
+ if(a=="lr"){S.qi=-1;S.i=0;S.show=false;draw()}
+ if(a=="lnx"){if(S.i<ST[S.k].sc.length-1){S.i++;draw()}else{S.qi=0;S.s=0;S.a=null;S.o=sh(ST[S.k].q[0].slice(1));draw()}}
+ if(a=="la"&&S.a==null){const k=+t.dataset.k;S.a=k;if(S.o[k]===ST[S.k].q[S.qi][1]){S.s++;boom(14)}draw()}
+ if(a=="ln"){S.qi++;S.a=null;const q=ST[S.k].q[S.qi];if(q)S.o=sh(q.slice(1));draw()}
+ if(a=="gt"){S.show=!S.show;draw()}
+ if(a=="gp")playG();
+ if(a=="gs"){S.slow=!S.slow;draw()}
+ if(a=="gx"){RUN++;try{speechSynthesis.cancel()}catch(e){}S.li=-1;draw()}
+ if(a=="gq"){RUN++;try{speechSynthesis.cancel()}catch(e){}S.qi=0;S.s=0;S.a=null;S.o=sh(LT[S.k].q[0].slice(1));draw()}
+ if(a=="g2"&&S.a==null){const k=+t.dataset.k;S.a=k;if(S.o[k]===LT[S.k].q[S.qi][1]){S.s++;boom(14)}draw()}
+ if(a=="g3"){S.qi++;S.a=null;const q=LT[S.k].q[S.qi];if(q)S.o=sh(q.slice(1));draw()}
+ if(a=="gr"){S.qi=-1;S.li=-1;S.show=false;draw()}
+ if(a=="nm"){const v=document.querySelector("#nm").value.trim();if(v){ME=v;BD[ME]=BD[ME]||{pts:0,ok:0};save();who();draw()}}
+ if(a=="sw"){ME="";save();who()}
+ if(a=="ad"){const n=document.querySelector("#an").value.trim(),p=Math.max(0,Math.round(+document.querySelector("#ap").value));if(n&&p){const o=BD[n]||{pts:0,ok:0};o.pts=Math.max(o.pts,p);BD[n]=o;save();who();draw()}}
+ if(a=="cp"&&ME){try{navigator.clipboard.writeText(ME+" - "+(BD[ME]||{pts:0}).pts+" pts");t.textContent="Copied ✓"}catch(e){}}
+ if(a=="rs"){if(S.rst){BD={};save();who();S.rst=0}else S.rst=1;draw()}
+ if(a=="cb"){try{navigator.clipboard.writeText(Object.entries(BD).map(([n,b])=>n+": "+b.pts).join("\n"));t.textContent="Copied ✓"}catch(e){}}
+});
+start();
+</script></body></html>
